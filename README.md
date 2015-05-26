@@ -1,6 +1,8 @@
-# McPAT
+# McPAT [![Build Status][status-img]][status-url]
 
 The package provides an interface to [McPAT][1].
+
+## [Documentation][doc]
 
 ## Contributing
 
@@ -9,3 +11,7 @@ The package provides an interface to [McPAT][1].
 3. Open a pull request.
 
 [1]: http://www.hpl.hp.com/research/mcpat
+
+[status-img]: https://travis-ci.org/stainless-steel/mcpat.svg?branch=master
+[status-url]: https://travis-ci.org/stainless-steel/mcpat
+[doc]: https://stainless-steel.github.io/mcpat
