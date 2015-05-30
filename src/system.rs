@@ -12,7 +12,7 @@ pub struct System<'l> {
 }
 
 impl<'l> System<'l> {
-    /// Create a system based on an XML specification.
+    /// Load the system from an XML file.
     pub fn new(path: &Path) -> Result<System> {
         if !exists(path) {
             raise!(NotFound, format!("{:?} does not exist", path));
@@ -32,6 +32,11 @@ impl<'l> Drop for System<'l> {
         debug_assert!(!self.raw.is_null());
         unsafe { raw::delete_ParseXML(self.raw) };
     }
+}
+
+#[inline]
+pub fn as_raw(system: &System) -> *mut raw::ParseXML {
+    system.raw
 }
 
 #[inline]

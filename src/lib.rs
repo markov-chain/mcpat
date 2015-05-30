@@ -38,6 +38,8 @@ macro_rules! path_to_c_str(
     });
 );
 
+mod processor;
 mod system;
 
+pub use processor::Processor;
 pub use system::System;
