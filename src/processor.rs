@@ -11,7 +11,7 @@ pub struct Processor<'l> {
 
 impl<'l> Processor<'l> {
     /// Compute the processor corresponding to a system.
-    pub fn new(system: &System) -> Result<Processor<'l>> {
+    pub fn new(system: &System<'l>) -> Result<Processor<'l>> {
         let raw = unsafe { raw::new_Processor(::system::as_raw(system)) };
         if raw.is_null() {
             raise!(NoMemory, "cannot allocate memory for a processor");
