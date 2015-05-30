@@ -13,7 +13,6 @@ pub struct System<'l> {
 
 impl<'l> System<'l> {
     /// Create a system based on an XML specification.
-    #[inline]
     pub fn new(path: &Path) -> Result<System> {
         if !exists(path) {
             raise!(NotFound, format!("{:?} does not exist", path));
