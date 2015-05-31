@@ -1,12 +1,13 @@
 use raw;
 use std::marker::PhantomData;
 
+use {Raw, Phantom};
 use component::{Component, Power};
 
 /// A core.
 pub struct Core<'l> {
-    raw: (*mut raw::Core, *mut raw::root_system),
-    phantom: PhantomData<(&'l raw::Core, &'l raw::root_system)>,
+    raw: Raw<raw::Core>,
+    phantom: Phantom<'l, raw::Core>,
 }
 
 impl<'l> Component for Core<'l> {

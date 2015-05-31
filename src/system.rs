@@ -3,12 +3,12 @@ use std::fs;
 use std::marker::PhantomData;
 use std::path::Path;
 
-use {Result, Processor};
+use {Raw, Result, Phantom, Processor};
 
 /// A system.
 pub struct System<'l> {
-    raw: (*mut raw::ParseXML, *mut raw::root_system),
-    phantom: PhantomData<(&'l raw::ParseXML, &'l raw::root_system)>,
+    raw: Raw<raw::ParseXML>,
+    phantom: Phantom<'l, raw::ParseXML>,
 }
 
 impl<'l> System<'l> {

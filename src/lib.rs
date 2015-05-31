@@ -57,6 +57,9 @@ macro_rules! debug_not_null(
     });
 );
 
+type Raw<T> = (*mut T, *mut raw::root_system);
+type Phantom<'l, T> = std::marker::PhantomData<(&'l T, &'l raw::root_system)>;
+
 mod component;
 mod core;
 mod processor;

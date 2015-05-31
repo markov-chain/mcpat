@@ -2,20 +2,20 @@ use libc::c_int;
 use raw;
 use std::marker::PhantomData;
 
-use Core;
+use {Core, Raw, Phantom};
 
 /// A processor.
 pub struct Processor<'l> {
-    raw: (*mut raw::Processor, *mut raw::root_system),
-    phantom: PhantomData<(&'l raw::Processor, &'l raw::root_system)>,
+    raw: Raw<raw::Processor>,
+    phantom: Phantom<'l, raw::Processor>,
 }
 
 /// An iterator over cores.
 pub struct Cores<'l> {
     length: usize,
     position: usize,
-    raw: (*mut raw::Processor, *mut raw::root_system),
-    phantom: PhantomData<(&'l raw::Processor, &'l raw::root_system)>,
+    raw: Raw<raw::Processor>,
+    phantom: Phantom<'l, raw::Processor>,
 }
 
 impl<'l> Processor<'l> {
