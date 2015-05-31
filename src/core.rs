@@ -19,7 +19,7 @@ impl<'l> Component for Core<'l> {
             let raw = raw::powerDef_readOp(raw);
             debug_assert!(!raw.is_null());
             Power {
-                dynamic: raw::powerComponents_dynamic(raw),
+                dynamic: raw::powerComponents_dynamic(raw) * raw::Core_clockRate(self.raw.0),
                 leakage: if (&*self.raw.1).longer_channel_device > 0 {
                             raw::powerComponents_longer_channel_leakage(raw)
                          } else {

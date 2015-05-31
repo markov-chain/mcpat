@@ -69,3 +69,10 @@ pub use component::{Component, Power};
 pub use core::Core;
 pub use processor::{Cores, Processor};
 pub use system::System;
+
+/// Set a *global* flag controlling the optimization procedure. If true, apart
+/// from other optimization goals, the optimization is performed for the target
+/// clock rate. The switch is turned off by default.
+pub fn set_optimzed_for_clock_rate(value: bool) {
+    unsafe { raw::set_opt_for_clk(if value { 1 } else { 0 }) };
+}
