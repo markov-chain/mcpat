@@ -1,3 +1,4 @@
+extern crate libc;
 extern crate mcpat_sys as raw;
 
 /// An error.
@@ -38,8 +39,30 @@ macro_rules! path_to_c_str(
     });
 );
 
+macro_rules! not_null(
+    ($result:expr) => ({
+        let pointer = $result;
+        if pointer.is_null() {
+            raise!(NoMemory, "cannot allocate memory");
+        }
+        pointer
+    });
+);
+
+macro_rules! debug_not_null(
+    ($result:expr) => ({
+        let pointer = $result;
+        debug_assert!(!pointer.is_null());
+        pointer
+    });
+);
+
+mod component;
+mod core;
 mod processor;
 mod system;
 
-pub use processor::Processor;
+pub use component::{Component, Power};
+pub use core::Core;
+pub use processor::{Cores, Processor};
 pub use system::System;

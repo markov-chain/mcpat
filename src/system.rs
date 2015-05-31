@@ -3,12 +3,12 @@ use std::fs;
 use std::marker::PhantomData;
 use std::path::Path;
 
-use Result;
+use {Result, Processor};
 
 /// A system.
 pub struct System<'l> {
-    raw: *mut raw::ParseXML,
-    phantom: PhantomData<&'l raw::ParseXML>,
+    raw: (*mut raw::ParseXML, *mut raw::root_system),
+    phantom: PhantomData<(&'l raw::ParseXML, &'l raw::root_system)>,
 }
 
 impl<'l> System<'l> {
@@ -17,26 +17,34 @@ impl<'l> System<'l> {
         if !exists(path) {
             raise!(NotFound, format!("{:?} does not exist", path));
         }
-        let raw = unsafe { raw::new_ParseXML() };
-        if raw.is_null() {
-            raise!(NoMemory, "cannot allocate memory for an XML parser");
+        unsafe {
+            let raw = not_null!(raw::new_ParseXML());
+            raw::ParseXML_parse(raw, path_to_c_str!(path) as *mut _);
+            Ok(System {
+                raw: (raw, debug_not_null!(raw::ParseXML_sys(raw))),
+                phantom: PhantomData,
+            })
         }
-        unsafe { raw::ParseXML_parse(raw, path_to_c_str!(path) as *mut _) };
-        Ok(System { raw: raw, phantom: PhantomData })
+    }
+
+    /// Compute the processor corresponding to the system.
+    pub fn processor(&self) -> Result<Processor<'l>> {
+        let raw = unsafe { not_null!(raw::new_Processor(self.raw.0)) };
+        Ok(::processor::from_raw((raw, self.raw.1)))
+    }
+
+    /// Return the raw description of the system.
+    #[inline(always)]
+    pub fn raw(&self) -> &raw::root_system {
+        unsafe { &*self.raw.1 }
     }
 }
 
 impl<'l> Drop for System<'l> {
     #[inline]
     fn drop(&mut self) {
-        debug_assert!(!self.raw.is_null());
-        unsafe { raw::delete_ParseXML(self.raw) };
+        unsafe { raw::delete_ParseXML(debug_not_null!(self.raw.0)) };
     }
-}
-
-#[inline]
-pub fn as_raw(system: &System) -> *mut raw::ParseXML {
-    system.raw
 }
 
 #[inline]

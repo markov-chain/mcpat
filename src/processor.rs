@@ -1,29 +1,65 @@
+use libc::c_int;
 use raw;
 use std::marker::PhantomData;
 
-use {Result, System};
+use Core;
 
 /// A processor.
 pub struct Processor<'l> {
-    raw: *mut raw::Processor,
-    phantom: PhantomData<&'l raw::Processor>,
+    raw: (*mut raw::Processor, *mut raw::root_system),
+    phantom: PhantomData<(&'l raw::Processor, &'l raw::root_system)>,
+}
+
+/// An iterator over cores.
+pub struct Cores<'l> {
+    length: usize,
+    position: usize,
+    raw: (*mut raw::Processor, *mut raw::root_system),
+    phantom: PhantomData<(&'l raw::Processor, &'l raw::root_system)>,
 }
 
 impl<'l> Processor<'l> {
-    /// Compute the processor corresponding to a system.
-    pub fn new(system: &System<'l>) -> Result<Processor<'l>> {
-        let raw = unsafe { raw::new_Processor(::system::as_raw(system)) };
-        if raw.is_null() {
-            raise!(NoMemory, "cannot allocate memory for a processor");
+    /// Return an iterator over cores.
+    #[inline]
+    pub fn cores(&self) -> Cores<'l> {
+        Cores {
+            length: unsafe { raw::Processor_numCore(self.raw.0) } as usize,
+            position: 0,
+            raw: self.raw,
+            phantom: PhantomData,
         }
-        Ok(Processor { raw: raw, phantom: PhantomData })
     }
 }
 
 impl<'l> Drop for Processor<'l> {
     #[inline]
     fn drop(&mut self) {
-        debug_assert!(!self.raw.is_null());
-        unsafe { raw::delete_Processor(self.raw) };
+        unsafe { raw::delete_Processor(debug_not_null!(self.raw.0)) };
     }
+}
+
+impl<'l> Cores<'l> {
+    #[inline]
+    pub fn len(&self) -> usize { self.length }
+}
+
+impl<'l> Iterator for Cores<'l> {
+    type Item = Core<'l>;
+
+    fn next(&mut self) -> Option<Core<'l>> {
+        if self.position == self.length {
+            None
+        } else {
+            let raw = unsafe {
+                debug_not_null!(raw::Processor_cores(self.raw.0, self.position as c_int))
+            };
+            self.position += 1;
+            Some(::core::from_raw((raw, self.raw.1)))
+        }
+    }
+}
+
+#[inline]
+pub fn from_raw<'l>(raw: (*mut raw::Processor, *mut raw::root_system)) -> Processor<'l> {
+    Processor { raw: raw, phantom: PhantomData }
 }

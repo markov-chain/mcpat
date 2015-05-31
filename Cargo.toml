@@ -9,4 +9,5 @@ documentation = "https://stainless-steel.github.io/mcpat"
 description = "The package provides an interface to McPAT."
 
 [dependencies]
+libc = "*"
 mcpat-sys = "*"

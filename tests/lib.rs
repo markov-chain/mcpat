@@ -1,6 +1,6 @@
 extern crate mcpat;
 
-use mcpat::{System, Processor};
+use mcpat::System;
 use std::path::PathBuf;
 
 macro_rules! ok(
@@ -11,5 +11,10 @@ macro_rules! ok(
 fn workflow() {
     let path = PathBuf::from("tests/fixtures/Xeon.xml");
     let system = ok!(System::new(&path));
-    let _processor = ok!(Processor::new(&system));
+    let processor = ok!(system.processor());
+
+    let mut cores = processor.cores();
+    assert_eq!(cores.len(), 1);
+
+    let _core = cores.next().unwrap();
 }
