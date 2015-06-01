@@ -10,13 +10,19 @@ pub struct Processor<'l> {
     phantom: Phantom<'l, raw::Processor>,
 }
 
-/// An iterator over cores.
-pub struct Cores<'l> {
+struct Items<'l, T> {
     length: usize,
     position: usize,
     raw: Raw<raw::Processor>,
-    phantom: Phantom<'l, raw::Processor>,
+    phantom: PhantomData<(&'l raw::Processor, &'l raw::root_system, T)>,
 }
+
+trait Reader {
+    fn read(raw: Raw<raw::Processor>, i: usize) -> Self;
+}
+
+/// An iterator over cores.
+pub type Cores<'l> = Items<'l, Core<'l>>;
 
 impl<'l> Processor<'l> {
     /// Return an iterator over cores.
@@ -38,23 +44,31 @@ impl<'l> Drop for Processor<'l> {
     }
 }
 
-impl<'l> Cores<'l> {
+impl<'l, T> Items<'l, T> {
+    /// Return the total number of items regardless of how many have been
+    /// traversed.
     #[inline]
     pub fn len(&self) -> usize { self.length }
 }
 
-impl<'l> Iterator for Cores<'l> {
-    type Item = Core<'l>;
+impl<'l, T> Iterator for Items<'l, T> where T: Reader {
+    type Item = T;
 
-    fn next(&mut self) -> Option<Core<'l>> {
+    fn next(&mut self) -> Option<T> {
         if self.position == self.length {
             None
         } else {
-            let raw = unsafe {
-                debug_not_null!(raw::Processor_cores(self.raw.0, self.position as c_int))
-            };
             self.position += 1;
-            Some(::core::from_raw((raw, self.raw.1)))
+            Some(<T as Reader>::read(self.raw, self.position - 1))
+        }
+    }
+}
+
+impl<'l> Reader for Core<'l> {
+    #[inline]
+    fn read(raw: Raw<raw::Processor>, i: usize) -> Core<'l> {
+        unsafe {
+            ::core::from_raw((debug_not_null!(raw::Processor_cores(raw.0, i as c_int)), raw.1))
         }
     }
 }
