@@ -13,7 +13,7 @@ pub struct System<'l> {
 
 impl<'l> System<'l> {
     /// Load a system from an XML file.
-    pub fn load(path: &Path) -> Result<System> {
+    pub fn open(path: &Path) -> Result<System> {
         if !exists(path) {
             raise!(NotFound, format!("{:?} does not exist", path));
         }

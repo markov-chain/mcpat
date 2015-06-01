@@ -77,8 +77,8 @@ pub use system::System;
 
 /// Load a system from an XML file.
 #[inline]
-pub fn load(path: &Path) -> Result<System> {
-    System::load(path)
+pub fn open(path: &Path) -> Result<System> {
+    System::open(path)
 }
 
 /// Set a *global* flag controlling the optimization procedure. If true, apart

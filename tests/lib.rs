@@ -20,7 +20,7 @@ fn workflow() {
     mcpat::set_optimzed_for_clock_rate(true);
 
     let path = PathBuf::from("tests/fixtures/Xeon.xml");
-    let system = ok!(System::load(&path));
+    let system = ok!(System::open(&path));
     let processor = ok!(system.processor());
 
     {
