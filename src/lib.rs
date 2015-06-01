@@ -69,7 +69,7 @@ mod core;
 mod processor;
 mod system;
 
-pub use cache::L3;
+pub use cache::{Cache, L3};
 pub use component::{Component, Power};
 pub use core::Core;
 pub use processor::{Cores, L3s, Processor};
