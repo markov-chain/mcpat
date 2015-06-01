@@ -62,7 +62,7 @@ macro_rules! debug_not_null(
 );
 
 type Raw<T> = (*mut T, *mut raw::root_system);
-type Phantom<'l, T> = PhantomData<(&'l T, &'l raw::root_system)>;
+type Phantom<'l, T> = PhantomData<(T, &'l raw::root_system)>;
 
 mod cache;
 mod component;
@@ -98,7 +98,7 @@ impl Display for ErrorKind {
 
 /// Load a system from an XML file.
 #[inline]
-pub fn open<'l>(path: &Path) -> Result<System<'l>> {
+pub fn open(path: &Path) -> Result<System> {
     System::open(path)
 }
 

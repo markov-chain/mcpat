@@ -3,17 +3,17 @@ use std::fs;
 use std::marker::PhantomData;
 use std::path::Path;
 
-use {Raw, Result, Phantom, Processor};
+use {Raw, Result, Processor};
 
 /// A system.
-pub struct System<'l> {
+pub struct System {
     raw: Raw<raw::ParseXML>,
-    phantom: Phantom<'l, raw::ParseXML>,
+    phantom: PhantomData<raw::ParseXML>,
 }
 
-impl<'l> System<'l> {
+impl System {
     /// Load a system from an XML file.
-    pub fn open(path: &Path) -> Result<System<'l>> {
+    pub fn open(path: &Path) -> Result<System> {
         if !exists(path) {
             raise!(NotFound, format!("the file {:?} does not exist", path));
         }
@@ -28,7 +28,7 @@ impl<'l> System<'l> {
     }
 
     /// Compute the processor corresponding to the system.
-    pub fn processor(&self) -> Result<Processor<'l>> {
+    pub fn processor<'l>(&'l self) -> Result<Processor<'l>> {
         let raw = unsafe { not_null!(raw::new_Processor(self.raw.0)) };
         Ok(::processor::from_raw((raw, self.raw.1)))
     }
@@ -40,7 +40,7 @@ impl<'l> System<'l> {
     }
 }
 
-impl<'l> Drop for System<'l> {
+impl Drop for System {
     #[inline]
     fn drop(&mut self) {
         unsafe { raw::delete_ParseXML(debug_not_null!(self.raw.0)) };
