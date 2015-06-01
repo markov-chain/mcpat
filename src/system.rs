@@ -54,17 +54,3 @@ fn exists(path: &Path) -> bool {
         Err(_) => false,
     }
 }
-
-#[cfg(test)]
-mod tests {
-    use std::path::PathBuf;
-    use super::System;
-
-    #[test]
-    fn lifetime_independency_of_path() {
-        let _system = {
-            let path = PathBuf::from("foo");
-            System::open(&path)
-        };
-    }
-}

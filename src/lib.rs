@@ -98,7 +98,7 @@ impl Display for ErrorKind {
 
 /// Load a system from an XML file.
 #[inline]
-pub fn open(path: &Path) -> Result<System> {
+pub fn open<'l>(path: &Path) -> Result<System<'l>> {
     System::open(path)
 }
 
@@ -107,4 +107,17 @@ pub fn open(path: &Path) -> Result<System> {
 /// clock rate. The switch is turned off by default.
 pub fn set_optimzed_for_clock_rate(value: bool) {
     unsafe { raw::set_opt_for_clk(if value { 1 } else { 0 }) };
+}
+
+#[cfg(test)]
+mod tests {
+    use std::path::PathBuf;
+
+    #[test]
+    fn open() {
+        let _system = {
+            let path = PathBuf::from("foo");
+            ::open(&path)
+        };
+    }
 }
