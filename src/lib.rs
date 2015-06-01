@@ -1,6 +1,9 @@
 extern crate libc;
 extern crate mcpat_sys as raw;
 
+use std::marker::PhantomData;
+use std::path::Path;
+
 /// An error.
 #[derive(Clone, Debug)]
 pub struct Error {
@@ -58,7 +61,7 @@ macro_rules! debug_not_null(
 );
 
 type Raw<T> = (*mut T, *mut raw::root_system);
-type Phantom<'l, T> = std::marker::PhantomData<(&'l T, &'l raw::root_system)>;
+type Phantom<'l, T> = PhantomData<(&'l T, &'l raw::root_system)>;
 
 mod cache;
 mod component;
@@ -71,6 +74,12 @@ pub use component::{Component, Power};
 pub use core::Core;
 pub use processor::{Cores, Processor};
 pub use system::System;
+
+/// Load a system from an XML file.
+#[inline]
+pub fn load(path: &Path) -> Result<System> {
+    System::load(path)
+}
 
 /// Set a *global* flag controlling the optimization procedure. If true, apart
 /// from other optimization goals, the optimization is performed for the target
