@@ -15,7 +15,7 @@ impl<'l> System<'l> {
     /// Load a system from an XML file.
     pub fn open(path: &Path) -> Result<System> {
         if !exists(path) {
-            raise!(NotFound, format!("{:?} does not exist", path));
+            raise!(NotFound, format!("the file {:?} does not exist", path));
         }
         unsafe {
             let raw = not_null!(raw::new_ParseXML());

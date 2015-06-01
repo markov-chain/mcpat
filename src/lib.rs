@@ -1,6 +1,7 @@
 extern crate libc;
 extern crate mcpat_sys as raw;
 
+use std::fmt::{self, Display, Formatter};
 use std::marker::PhantomData;
 use std::path::Path;
 
@@ -74,6 +75,26 @@ pub use component::{Component, Power};
 pub use core::Core;
 pub use processor::{Cores, L3s, Processor};
 pub use system::System;
+
+impl Display for Error {
+    fn fmt(&self, formatter: &mut Formatter) -> fmt::Result {
+        match self.message {
+            Some(ref message) => Display::fmt(message, formatter),
+            None => Display::fmt(&self.kind, formatter),
+        }
+    }
+}
+
+impl Display for ErrorKind {
+    fn fmt(&self, formatter: &mut Formatter) -> fmt::Result {
+        use ErrorKind::*;
+        match *self {
+            NoMemory => write!(formatter, "cannot allocate memory"),
+            NotFound => write!(formatter, "a file does not exist"),
+            _ => write!(formatter, "an unknown error occurred"),
+        }
+    }
+}
 
 /// Load a system from an XML file.
 #[inline]
