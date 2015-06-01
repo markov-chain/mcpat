@@ -13,7 +13,7 @@ pub struct System<'l> {
 
 impl<'l> System<'l> {
     /// Load a system from an XML file.
-    pub fn open(path: &Path) -> Result<System> {
+    pub fn open(path: &Path) -> Result<System<'l>> {
         if !exists(path) {
             raise!(NotFound, format!("the file {:?} does not exist", path));
         }
@@ -52,5 +52,19 @@ fn exists(path: &Path) -> bool {
     match fs::metadata(path) {
         Ok(metadata) => !metadata.is_dir(),
         Err(_) => false,
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use std::path::PathBuf;
+    use super::System;
+
+    #[test]
+    fn lifetime_independency_of_path() {
+        let _system = {
+            let path = PathBuf::from("foo");
+            System::open(&path)
+        };
     }
 }
