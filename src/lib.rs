@@ -72,7 +72,7 @@ mod system;
 pub use cache::L3;
 pub use component::{Component, Power};
 pub use core::Core;
-pub use processor::{Cores, Processor};
+pub use processor::{Cores, L3s, Processor};
 pub use system::System;
 
 /// Load a system from an XML file.
