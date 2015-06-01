@@ -2,7 +2,7 @@ use libc::c_int;
 use raw;
 use std::marker::PhantomData;
 
-use {Core, Raw, Phantom};
+use {Core, L3, Phantom, Raw};
 
 /// A processor.
 pub struct Processor<'l> {
@@ -24,12 +24,26 @@ trait Reader {
 /// An iterator over cores.
 pub type Cores<'l> = Items<'l, Core<'l>>;
 
+/// An iterator over L3 caches.
+pub type L3s<'l> = Items<'l, L3<'l>>;
+
 impl<'l> Processor<'l> {
     /// Return an iterator over cores.
     #[inline]
     pub fn cores(&self) -> Cores<'l> {
         Cores {
             length: unsafe { raw::Processor_numCore(self.raw.0) } as usize,
+            position: 0,
+            raw: self.raw,
+            phantom: PhantomData,
+        }
+    }
+
+    /// Return an iterator over L3 caches.
+    #[inline]
+    pub fn l3s(&self) -> L3s<'l> {
+        L3s {
+            length: unsafe { raw::Processor_numL3(self.raw.0) } as usize,
             position: 0,
             raw: self.raw,
             phantom: PhantomData,
@@ -69,6 +83,17 @@ impl<'l> Reader for Core<'l> {
     fn read(raw: Raw<raw::Processor>, i: usize) -> Core<'l> {
         unsafe {
             ::core::from_raw((debug_not_null!(raw::Processor_cores(raw.0, i as c_int)), raw.1))
+        }
+    }
+}
+
+impl<'l> Reader for L3<'l> {
+    #[inline]
+    fn read(raw: Raw<raw::Processor>, i: usize) -> L3<'l> {
+        use std::mem::transmute;
+        unsafe {
+            let raw = (debug_not_null!(raw::Processor_l3array(raw.0, i as c_int)), raw.1);
+            transmute(::cache::from_raw(raw))
         }
     }
 }

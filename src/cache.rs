@@ -1,25 +1,29 @@
 use raw;
 use std::marker::PhantomData;
 
-use {Phantom, Raw};
+use {Raw, Phantom};
 use component::{Component, Power};
 
-/// A core.
-pub struct Core<'l> {
-    raw: Raw<raw::Core>,
-    phantom: Phantom<'l, raw::Core>,
+/// A cache.
+pub struct Cache<'l> {
+    raw: Raw<raw::SharedCache>,
+    phantom: Phantom<'l, raw::SharedCache>,
 }
 
-impl<'l> Component for Core<'l> {
+/// An L3 cache.
+pub type L3<'l> = Cache<'l>;
+
+impl<'l> Component for Cache<'l> {
     #[inline]
     fn power(&self) -> Power {
         unsafe {
-            let raw = raw::Core_power(self.raw.0);
+            let raw = raw::SharedCache_power(self.raw.0);
             debug_assert!(!raw.is_null());
             let raw = raw::powerDef_readOp(raw);
             debug_assert!(!raw.is_null());
             Power {
-                dynamic: raw::powerComponents_dynamic(raw) * raw::Core_clockRate(self.raw.0),
+                dynamic: raw::powerComponents_dynamic(raw) *
+                         raw::CacheDynParam_clockRate(raw::SharedCache_cachep(self.raw.0)),
                 leakage: if (&*self.raw.1).longer_channel_device > 0 {
                             raw::powerComponents_longer_channel_leakage(raw)
                          } else {
@@ -31,6 +35,6 @@ impl<'l> Component for Core<'l> {
 }
 
 #[inline]
-pub fn from_raw<'l>(raw: (*mut raw::Core, *mut raw::root_system)) -> Core<'l> {
-    Core { raw: raw, phantom: PhantomData }
+pub fn from_raw<'l>(raw: (*mut raw::SharedCache, *mut raw::root_system)) -> Cache<'l> {
+    Cache { raw: raw, phantom: PhantomData }
 }
