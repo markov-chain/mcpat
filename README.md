@@ -1,4 +1,4 @@
-# McPAT [![Build Status][status-img]][status-url]
+# McPAT [![Version][version-img]][version-url] [![Status][status-img]][status-url]
 
 The package provides an interface to [McPAT][1].
 
@@ -12,6 +12,8 @@ The package provides an interface to [McPAT][1].
 
 [1]: http://www.hpl.hp.com/research/mcpat
 
+[version-img]: https://img.shields.io/crates/v/mcpat.svg
+[version-url]: https://crates.io/crates/mcpat
 [status-img]: https://travis-ci.org/stainless-steel/mcpat.svg?branch=master
 [status-url]: https://travis-ci.org/stainless-steel/mcpat
 [doc]: https://stainless-steel.github.io/mcpat
