@@ -1,6 +1,9 @@
 extern crate libc;
 extern crate mcpat_sys as raw;
 
+#[cfg(feature = "caching")]
+extern crate hiredis;
+
 use std::fmt::{self, Display, Formatter};
 use std::marker::PhantomData;
 use std::path::Path;
@@ -15,7 +18,7 @@ pub struct Error {
 /// An error kind.
 #[derive(Clone, Copy, Debug)]
 pub enum ErrorKind {
-    NoMemory,
+    OutOfMemory,
     NotFound,
     Other,
 }
@@ -28,17 +31,21 @@ macro_rules! raise(
     ($kind:ident, $message:expr) => (
         return Err(::Error {
             kind: ::ErrorKind::$kind,
-            message: Some(String::from($message)),
+            message: Some($message.to_string()),
         })
     );
 );
 
+macro_rules! str_to_c_str(
+    ($string:expr) => (match ::std::ffi::CString::new($string) {
+        Ok(string) => string.as_ptr(),
+        Err(_) => raise!("failed to process a string"),
+    });
+);
+
 macro_rules! path_to_c_str(
     ($path:expr) => (match $path.to_str() {
-        Some(path) => match ::std::ffi::CString::new(path) {
-            Ok(string) => string.as_ptr(),
-            Err(_) => raise!("failed to process a path"),
-        },
+        Some(path) => str_to_c_str!(path),
         None => raise!("failed to process a path"),
     });
 );
@@ -47,7 +54,7 @@ macro_rules! not_null(
     ($result:expr) => ({
         let pointer = $result;
         if pointer.is_null() {
-            raise!(NoMemory, "cannot allocate memory");
+            raise!(OutOfMemory, "cannot allocate memory");
         }
         pointer
     });
@@ -70,6 +77,9 @@ mod core;
 mod processor;
 mod system;
 
+#[cfg(feature = "caching")]
+pub mod caching;
+
 pub use cache::{Cache, L3};
 pub use component::{Component, Power};
 pub use core::Core;
@@ -89,9 +99,9 @@ impl Display for ErrorKind {
     fn fmt(&self, formatter: &mut Formatter) -> fmt::Result {
         use ErrorKind::*;
         match *self {
-            NoMemory => write!(formatter, "cannot allocate memory"),
-            NotFound => write!(formatter, "a file does not exist"),
-            _ => write!(formatter, "an unknown error occurred"),
+            OutOfMemory => write!(formatter, "out of memory"),
+            NotFound => write!(formatter, "file not found"),
+            Other => write!(formatter, "other"),
         }
     }
 }
@@ -106,7 +116,7 @@ pub fn open(path: &Path) -> Result<System> {
 /// from other optimization goals, the optimization is performed for the target
 /// clock rate. The switch is turned off by default.
 pub fn set_optimzed_for_clock_rate(value: bool) {
-    unsafe { raw::set_opt_for_clk(if value { 1 } else { 0 }) };
+    unsafe { raw::opt_for_clk_set(if value { 1 } else { 0 }) };
 }
 
 #[cfg(test)]

@@ -9,8 +9,12 @@ documentation = "https://stainless-steel.github.io/mcpat"
 description = "The package provides an interface to McPAT."
 
 [features]
-cache = ["mcpat-sys/cache"]
+caching = ["mcpat-sys/caching", "hiredis"]
 
 [dependencies]
 libc = "*"
 mcpat-sys = "*"
+
+[dependencies.hiredis]
+version = "*"
+optional = true
