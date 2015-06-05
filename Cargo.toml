@@ -8,6 +8,9 @@ homepage = "https://github.com/stainless-steel/mcpat"
 documentation = "https://stainless-steel.github.io/mcpat"
 description = "The package provides an interface to McPAT."
 
+[features]
+cache = ["mcpat-sys/cache"]
+
 [dependencies]
 libc = "*"
 mcpat-sys = "*"
