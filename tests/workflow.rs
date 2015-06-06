@@ -22,7 +22,7 @@ fn workflow() {
         let core = cores.next().unwrap();
         let power = core.power();
         assert_eq!(round!(power.dynamic, 4), 55.7891);
-        assert_eq!(round!(power.leakage, 3), round!(12.0565 + 0.74513, 3));
+        assert_eq!(round!(power.leakage, 3), round!(5.15028 + 0.74513, 3));
     }
 
     {
@@ -32,7 +32,7 @@ fn workflow() {
         let l3 = l3s.next().unwrap();
         let power = l3.power();
         assert_eq!(round!(power.dynamic, 5), 4.32382);
-        assert_eq!(round!(power.leakage, 3), round!(10.9824 + 0.165767, 3));
+        assert_eq!(round!(power.leakage, 3), round!(6.06659 + 0.165767, 3));
     }
 
     support::deinitialize();

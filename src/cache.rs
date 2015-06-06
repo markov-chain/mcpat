@@ -2,7 +2,7 @@ use raw;
 use std::marker::PhantomData;
 
 use {Raw, Phantom};
-use component::{Component, Power};
+use component::{self, Component, Power};
 
 /// A cache.
 pub struct Cache<'l> {
@@ -30,12 +30,7 @@ impl<'l> Component for Cache<'l> {
                 debug_assert!(!raw.is_null());
                 let raw = raw::powerDef_readOp(raw);
                 debug_assert!(!raw.is_null());
-                let subthreshold = if (&*self.raw.1).longer_channel_device > 0 {
-                    raw::powerComponents_longer_channel_leakage(raw)
-                } else {
-                    raw::powerComponents_leakage(raw)
-                };
-                subthreshold + raw::powerComponents_gate_leakage(raw)
+                component::leakage(self.raw.1, raw)
             };
             Power { dynamic: dynamic, leakage: leakage }
         }
