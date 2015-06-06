@@ -14,18 +14,27 @@ impl<'l> Component for Core<'l> {
     #[inline]
     fn power(&self) -> Power {
         unsafe {
-            let raw = raw::Core_power(self.raw.0);
-            debug_assert!(!raw.is_null());
-            let raw = raw::powerDef_readOp(raw);
-            debug_assert!(!raw.is_null());
-            Power {
-                dynamic: raw::powerComponents_dynamic(raw) * raw::Core_clockRate(self.raw.0),
-                leakage: if (&*self.raw.1).longer_channel_device > 0 {
-                            raw::powerComponents_longer_channel_leakage(raw)
-                         } else {
-                            raw::powerComponents_leakage(raw)
-                         } + raw::powerComponents_gate_leakage(raw),
-            }
+            let dynamic = {
+                let raw = raw::Core_rt_power(self.raw.0);
+                debug_assert!(!raw.is_null());
+                let raw = raw::powerDef_readOp(raw);
+                debug_assert!(!raw.is_null());
+                raw::powerComponents_dynamic(raw) /
+                raw::Core_executionTime(self.raw.0)
+            };
+            let leakage = {
+                let raw = raw::Core_power(self.raw.0);
+                debug_assert!(!raw.is_null());
+                let raw = raw::powerDef_readOp(raw);
+                debug_assert!(!raw.is_null());
+                let subthreshold = if (&*self.raw.1).longer_channel_device > 0 {
+                    raw::powerComponents_longer_channel_leakage(raw)
+                } else {
+                    raw::powerComponents_leakage(raw)
+                };
+                subthreshold + raw::powerComponents_gate_leakage(raw)
+            };
+            Power { dynamic: dynamic, leakage: leakage }
         }
     }
 }
