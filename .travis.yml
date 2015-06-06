@@ -4,6 +4,10 @@ sudo: required
 after_success:
   - curl https://stainless-steel.github.io/travis/after_success.sh | bash
 
+script:
+  - cargo build --verbose
+  - cargo test --verbose -- --nocapture
+
 env:
   global:
     secure: bjWh6WdsQRaMcMlEHjXoK9l2Ag0YghJTHj8OukMme/3ejparLlcUDR/ZWDM0PsStcQlWhwnOpAqWNFid3mEsHnZ4Fv28Zmj1HRkOTmEKR/2gEu7s/edzQbdYXh+x3NBiekKplodls4um8kiTL4+Nay46xAUNsw6R7JUpZD+1hqGBjsmHKpnNUBUPdhhmCf8qf/RFVPQS6Nz/ZiMfLNA4H4qwAaf/Y5Ntt7Cuy0C1W6oqDjCLxKWyHF0lUp5n69zTO0vZBi7p5PWzIVNilaGPi/xmoAoaDbPCj7umCduPhH1DVBWxottPeSsvwpIYlo/LaSWRX4N/rFPtG1FgyFAQOZJKmroq2JUnqjWpuZp1zHzf2b6+INGeL+qHAntW0oh1xCyvebxAG7zVB7bmQRfvrDdJd65Wr5yFXSuTdRX7th3ena4aB48OrH8nSEa9fpY3Q61zvwCTytp2/MlhlRjzXlrATjfFx7i1Qn7XSsh+fuaLGhULa5TMs8tNTZKcTTq34VV/RdZGCxY8Eyc59smJSZ8XrWzdT2hcN+ZZAuk9QHPcK2M5oKSM7zczJg/vAGTKMhYK/DqZedutWoEYnJ49RMiyiOa0HwUm34oF7tJpTrRDwQXLqSu0dbjNGCyng9ssFToTZCQGFgFTaDSwG7mo0M4RuTinelwt0RIO5HT6Xtk=
