@@ -3,21 +3,13 @@ extern crate mcpat;
 use mcpat::{Component, System};
 use std::path::PathBuf;
 
-macro_rules! ok(
-    ($result:expr) => ($result.unwrap());
-);
-
-macro_rules! round(
-    ($value:expr, $precision:expr) => ({
-        let scale = 10f64.powi($precision);
-        ($value * scale).round() / scale
-    });
-);
+#[macro_use]
+mod support;
 
 // https://github.com/copies/mcpat/blob/master/ExampleResults/Xeon
 #[test]
 fn workflow() {
-    initialize();
+    support::initialize();
 
     let path = PathBuf::from("tests/fixtures/Xeon.xml");
     let system = ok!(System::open(&path));
@@ -43,25 +35,5 @@ fn workflow() {
         assert_eq!(round!(power.leakage, 3), round!(10.9824 + 0.165767, 3));
     }
 
-    deinitialize();
-}
-
-#[cfg(not(feature = "caching"))]
-fn initialize() {
-    mcpat::set_optimzed_for_clock_rate(true);
-}
-
-#[cfg(not(feature = "caching"))]
-fn deinitialize() {
-}
-
-#[cfg(feature = "caching")]
-fn initialize() {
-    mcpat::set_optimzed_for_clock_rate(true);
-    ok!(mcpat::caching::activate("127.0.0.1", 6379));
-}
-
-#[cfg(feature = "caching")]
-fn deinitialize() {
-    mcpat::caching::deactivate();
+    support::deinitialize();
 }
