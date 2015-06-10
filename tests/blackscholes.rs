@@ -18,12 +18,12 @@ fn blackscholes() {
 
         let system = ok!(System::open(xml));
         let processor = ok!(system.processor());
-        let (cores, l3s) = (processor.cores().map(|c| c.power()).collect::<Vec<_>>(),
-                            processor.l3s().map(|c| c.power()).collect::<Vec<_>>());
+        let cores = processor.cores().map(|c| (c.area() * 1e-6, c.power())).collect::<Vec<_>>();
+        let l3s = processor.l3s().map(|c| (c.area() * 1e-6, c.power())).collect::<Vec<_>>();
 
         let txt = &PathBuf::from(xml).with_extension("txt");
         assert!(fixture::exists(txt));
-        let (expected_cores, expected_l3s) = parse_results(txt);
+        let (expected_cores, expected_l3s) = parse(txt);
 
         compare(&cores, &expected_cores);
         compare(&l3s, &expected_l3s);
@@ -37,7 +37,7 @@ fn find(extension: &str) -> Vec<PathBuf> {
     fixture::find::all_with_extension(&path, extension)
 }
 
-fn parse_results(path: &Path) -> (Vec<Power>, Vec<Power>) {
+fn parse(path: &Path) -> (Vec<(f64, Power)>, Vec<(f64, Power)>) {
     let mut file = ok!(File::open(path));
     let reader = BufReader::new(&mut file);
     let mut lines = reader.lines();
@@ -51,8 +51,8 @@ fn parse_results(path: &Path) -> (Vec<Power>, Vec<Power>) {
             _ => break,
         };
         match line.trim() {
-            "Core:" => cores.push(read_power(&mut lines)),
-            "L3" => l3s.push(read_power(&mut lines)),
+            "Core:" => cores.push(read(&mut lines)),
+            "L3" => l3s.push(read(&mut lines)),
             _ => {},
         }
     }
@@ -60,18 +60,20 @@ fn parse_results(path: &Path) -> (Vec<Power>, Vec<Power>) {
     (cores, l3s)
 }
 
-fn read_power<B: BufRead>(lines: &mut Lines<B>) -> Power {
-    let (mut dynamic, mut subthreshold, mut gate) = (None, None, None);
+fn read<B: BufRead>(lines: &mut Lines<B>) -> (f64, Power) {
+    let (mut area, mut dynamic, mut subthreshold, mut gate) = (None, None, None, None);
 
     fn extract_value(line: &str) -> &str {
         let line = line.trim();
         let k = ok!(line.find('='));
-        &line[(k + 2)..(line.len() - 2)]
+        &line[(k + 2)..line.rfind(' ').unwrap()]
     }
 
     while dynamic.is_none() || subthreshold.is_none() || gate.is_none() {
         let line = &ok!(ok!(lines.next()));
-        if line.contains("Runtime Dynamic") {
+        if line.contains("Area") {
+            area = Some(ok!(extract_value(line).parse::<f64>()));
+        } else if line.contains("Runtime Dynamic") {
             dynamic = Some(ok!(extract_value(line).parse::<f64>()));
         } else if line.contains("Subthreshold Leakage with power gating") {
             subthreshold = Some(ok!(extract_value(line).parse::<f64>()));
@@ -80,15 +82,16 @@ fn read_power<B: BufRead>(lines: &mut Lines<B>) -> Power {
         }
     }
 
-    Power { dynamic: ok!(dynamic), leakage: ok!(subthreshold) + ok!(gate) }
+    (ok!(area), Power { dynamic: ok!(dynamic), leakage: ok!(subthreshold) + ok!(gate) })
 }
 
-fn compare(actual: &[Power], expected: &[Power]) {
+fn compare(actual: &[(f64, Power)], expected: &[(f64, Power)]) {
     assert_eq!(actual.len(), expected.len());
 
     for (actual, expected) in actual.iter().zip(expected) {
-        equal(actual.dynamic, expected.dynamic);
-        equal(actual.leakage, expected.leakage);
+        equal(actual.0, expected.0);
+        equal(actual.1.dynamic, expected.1.dynamic);
+        equal(actual.1.leakage, expected.1.leakage);
     }
 }
 

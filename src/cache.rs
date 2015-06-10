@@ -15,6 +15,10 @@ pub type L3<'l> = Cache<'l>;
 
 impl<'l> Component for Cache<'l> {
     #[inline]
+    fn area(&self) -> f64 {
+        unsafe { raw::Area_get_area(raw::Component_area(self.raw.0 as *mut _)) }
+    }
+
     fn power(&self) -> Power {
         unsafe {
             let dynamic = {

@@ -11,6 +11,7 @@ pub struct Power {
 
 /// A component.
 pub trait Component {
+    fn area(&self) -> f64;
     fn power(&self) -> Power;
 }
 

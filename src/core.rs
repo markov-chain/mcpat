@@ -12,6 +12,10 @@ pub struct Core<'l> {
 
 impl<'l> Component for Core<'l> {
     #[inline]
+    fn area(&self) -> f64 {
+        unsafe { raw::Area_get_area(raw::Component_area(self.raw.0 as *mut _)) }
+    }
+
     fn power(&self) -> Power {
         unsafe {
             let dynamic = {
