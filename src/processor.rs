@@ -4,7 +4,7 @@ use std::marker::PhantomData;
 
 use {Core, L3, Phantom, Raw};
 
-/// A processor.
+/// A system on a chip.
 pub struct Processor<'l> {
     raw: Raw<raw::Processor>,
     phantom: Phantom<'l, raw::Processor>,

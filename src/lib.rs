@@ -15,7 +15,7 @@ pub struct Error {
     pub message: Option<String>,
 }
 
-/// An error kind.
+/// The class that an error belongs to.
 #[derive(Clone, Copy, Debug)]
 pub enum ErrorKind {
     OutOfMemory,
@@ -75,7 +75,7 @@ mod cache;
 mod component;
 mod core;
 mod processor;
-mod system;
+mod spec;
 
 #[cfg(feature = "caching")]
 pub mod caching;
@@ -84,7 +84,7 @@ pub use cache::{Cache, L3};
 pub use component::{Component, Power};
 pub use core::Core;
 pub use processor::{Cores, L3s, Processor};
-pub use system::System;
+pub use spec::Spec;
 
 impl Display for Error {
     fn fmt(&self, formatter: &mut Formatter) -> fmt::Result {
@@ -106,28 +106,18 @@ impl Display for ErrorKind {
     }
 }
 
-/// Load a system from an XML file.
+/// Load a specification from an XML file.
 #[inline]
-pub fn open(path: &Path) -> Result<System> {
-    System::open(path)
+pub fn open(path: &Path) -> Result<Spec> {
+    Spec::open(path)
 }
 
-/// Set a *global* flag controlling the optimization procedure. If true, apart
-/// from other optimization goals, the optimization is performed for the target
-/// clock rate. The switch is turned off by default.
+/// Set a *global* flag controlling the optimization procedure.
+///
+/// If the flag is set to true, apart from other optimization goals, the
+/// optimization is performed for the target clock rate. The switch is turned
+/// off by default.
+#[inline]
 pub fn set_optimzed_for_clock_rate(value: bool) {
     unsafe { raw::opt_for_clk_set(if value { 1 } else { 0 }) };
-}
-
-#[cfg(test)]
-mod tests {
-    use std::path::PathBuf;
-
-    #[test]
-    fn open() {
-        let _system = {
-            let path = PathBuf::from("foo");
-            ::open(&path)
-        };
-    }
 }

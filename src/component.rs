@@ -1,6 +1,6 @@
 use raw;
 
-/// Statistics about the power consumption of a component.
+/// Power consumption of a component.
 #[derive(Clone, Copy, Debug)]
 pub struct Power {
     /// The dynamic power.
@@ -9,9 +9,11 @@ pub struct Power {
     pub leakage: f64,
 }
 
-/// A component.
+/// A component of a system on a chip.
 pub trait Component {
+    /// Return the area occupied by the component.
     fn area(&self) -> f64;
+    /// Return the power consumed by the component.
     fn power(&self) -> Power;
 }
 
