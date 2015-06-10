@@ -18,7 +18,7 @@ impl<'l> Component for Cache<'l> {
     fn power(&self) -> Power {
         unsafe {
             let dynamic = {
-                let raw = raw::SharedCache_rt_power(self.raw.0);
+                let raw = raw::Component_rt_power(self.raw.0 as *mut _);
                 debug_assert!(!raw.is_null());
                 let raw = raw::powerDef_readOp(raw);
                 debug_assert!(!raw.is_null());
@@ -26,7 +26,7 @@ impl<'l> Component for Cache<'l> {
                 raw::CacheDynParam_executionTime(raw::SharedCache_cachep(self.raw.0))
             };
             let leakage = {
-                let raw = raw::SharedCache_power(self.raw.0);
+                let raw = raw::Component_power(self.raw.0 as *mut _);
                 debug_assert!(!raw.is_null());
                 let raw = raw::powerDef_readOp(raw);
                 debug_assert!(!raw.is_null());

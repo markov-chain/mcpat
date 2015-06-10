@@ -15,14 +15,14 @@ impl<'l> Component for Core<'l> {
     fn power(&self) -> Power {
         unsafe {
             let dynamic = {
-                let raw = raw::Core_rt_power(self.raw.0);
+                let raw = raw::Component_rt_power(self.raw.0 as *mut _);
                 debug_assert!(!raw.is_null());
                 let raw = raw::powerDef_readOp(raw);
                 debug_assert!(!raw.is_null());
                 raw::powerComponents_dynamic(raw) / raw::Core_executionTime(self.raw.0)
             };
             let leakage = {
-                let raw = raw::Core_power(self.raw.0);
+                let raw = raw::Component_power(self.raw.0 as *mut _);
                 debug_assert!(!raw.is_null());
                 let raw = raw::powerDef_readOp(raw);
                 debug_assert!(!raw.is_null());
