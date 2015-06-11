@@ -20,9 +20,8 @@ fn workflow() {
         assert_eq!(cores.len(), 1);
 
         let core = cores.next().unwrap();
-        let power = core.power();
-        assert_eq!(round!(power.dynamic, 4), 55.7891);
-        assert_eq!(round!(power.leakage, 3), round!(5.15028 + 0.74513, 3));
+        assert_eq!(round!(core.dynamic_power(), 4), 55.7891);
+        assert_eq!(round!(core.leakage_power(), 3), round!(5.15028 + 0.74513, 3));
     }
 
     {
@@ -30,9 +29,8 @@ fn workflow() {
         assert_eq!(l3s.len(), 1);
 
         let l3 = l3s.next().unwrap();
-        let power = l3.power();
-        assert_eq!(round!(power.dynamic, 5), 4.32382);
-        assert_eq!(round!(power.leakage, 3), round!(6.06659 + 0.165767, 3));
+        assert_eq!(round!(l3.dynamic_power(), 5), 4.32382);
+        assert_eq!(round!(l3.leakage_power(), 3), round!(6.06659 + 0.165767, 3));
     }
 
     support::deinitialize();

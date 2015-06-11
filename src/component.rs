@@ -1,20 +1,13 @@
 use raw;
 
-/// Power consumption of a component.
-#[derive(Clone, Copy, Debug)]
-pub struct Power {
-    /// The dynamic power.
-    pub dynamic: f64,
-    /// The leakage power.
-    pub leakage: f64,
-}
-
 /// A component of a system on a chip.
 pub trait Component {
-    /// Return the area occupied by the component.
+    /// Return the area (m^2).
     fn area(&self) -> f64;
-    /// Return the power consumed by the component.
-    fn power(&self) -> Power;
+    /// Return the dynamic power (W).
+    fn dynamic_power(&self) -> f64;
+    /// Return the leakage power (W).
+    fn leakage_power(&self) -> f64;
 }
 
 pub unsafe fn leakage(system: *mut raw::root_system,

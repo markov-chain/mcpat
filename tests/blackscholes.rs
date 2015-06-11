@@ -1,7 +1,7 @@
 extern crate fixture;
 extern crate mcpat;
 
-use mcpat::{Component, Power, System};
+use mcpat::{Component, System};
 use std::fs::File;
 use std::io::{BufRead, BufReader, Lines};
 use std::path::{Path, PathBuf};
@@ -13,17 +13,27 @@ mod support;
 fn blackscholes() {
     support::initialize();
 
+    macro_rules! collect(
+        ($components:expr) => ({
+            let mut data = vec![];
+            for component in $components {
+                data.push(1e6 * component.area());
+                data.push(component.dynamic_power());
+                data.push(component.leakage_power());
+            }
+            data
+        });
+    );
+
     for xml in find("xml").iter() {
         println!("Processing {:?}...", ok!(xml.file_name()));
 
         let system = ok!(System::open(xml));
         let processor = ok!(system.compute());
-        let cores = processor.cores().map(|c| (c.area() * 1e-6, c.power())).collect::<Vec<_>>();
-        let l3s = processor.l3s().map(|c| (c.area() * 1e-6, c.power())).collect::<Vec<_>>();
 
-        let txt = &PathBuf::from(xml).with_extension("txt");
-        assert!(fixture::exists(txt));
-        let (expected_cores, expected_l3s) = parse(txt);
+        let cores = collect!(processor.cores());
+        let l3s = collect!(processor.l3s());
+        let (expected_cores, expected_l3s) = parse(&PathBuf::from(xml).with_extension("txt"));
 
         compare(&cores, &expected_cores);
         compare(&l3s, &expected_l3s);
@@ -37,7 +47,7 @@ fn find(extension: &str) -> Vec<PathBuf> {
     fixture::find::all_with_extension(&path, extension)
 }
 
-fn parse(path: &Path) -> (Vec<(f64, Power)>, Vec<(f64, Power)>) {
+fn parse(path: &Path) -> (Vec<f64>, Vec<f64>) {
     let mut file = ok!(File::open(path));
     let reader = BufReader::new(&mut file);
     let mut lines = reader.lines();
@@ -51,8 +61,12 @@ fn parse(path: &Path) -> (Vec<(f64, Power)>, Vec<(f64, Power)>) {
             _ => break,
         };
         match line.trim() {
-            "Core:" => cores.push(read(&mut lines)),
-            "L3" => l3s.push(read(&mut lines)),
+            "Core:" => for quantity in read(&mut lines) {
+                cores.push(quantity);
+            },
+            "L3" => for quantity in read(&mut lines) {
+                l3s.push(quantity);
+            },
             _ => {},
         }
     }
@@ -60,7 +74,7 @@ fn parse(path: &Path) -> (Vec<(f64, Power)>, Vec<(f64, Power)>) {
     (cores, l3s)
 }
 
-fn read<B: BufRead>(lines: &mut Lines<B>) -> (f64, Power) {
+fn read<B: BufRead>(lines: &mut Lines<B>) -> Vec<f64> {
     let (mut area, mut dynamic, mut subthreshold, mut gate) = (None, None, None, None);
 
     fn extract_value(line: &str) -> &str {
@@ -82,16 +96,13 @@ fn read<B: BufRead>(lines: &mut Lines<B>) -> (f64, Power) {
         }
     }
 
-    (ok!(area), Power { dynamic: ok!(dynamic), leakage: ok!(subthreshold) + ok!(gate) })
+    vec![ok!(area), ok!(dynamic), ok!(subthreshold) + ok!(gate)]
 }
 
-fn compare(actual: &[(f64, Power)], expected: &[(f64, Power)]) {
+fn compare(actual: &[f64], expected: &[f64]) {
     assert_eq!(actual.len(), expected.len());
-
-    for (actual, expected) in actual.iter().zip(expected) {
-        equal(actual.0, expected.0);
-        equal(actual.1.dynamic, expected.1.dynamic);
-        equal(actual.1.leakage, expected.1.leakage);
+    for (&actual, &expected) in actual.iter().zip(expected) {
+        equal(actual, expected);
     }
 }
 
