@@ -96,11 +96,12 @@ fn compare(actual: &[(f64, Power)], expected: &[(f64, Power)]) {
 }
 
 fn equal(actual: f64, expected: f64) {
-    let string = format!("{}", expected);
-    let precision = match string.find('.') {
-        Some(k) => string.len() - k - 1,
-        _ => 1,
-    };
-    let scale = 10f64.powi(precision as i32);
+    let mut scale = 1.0;
+    for i in 0..16 {
+        scale = 10f64.powi(i);
+        if (expected - (expected * scale).round() / scale).abs() < 1e-8 {
+            break;
+        }
+    }
     assert_eq!((actual * scale).round() / scale, (expected * scale).round() / scale);
 }
