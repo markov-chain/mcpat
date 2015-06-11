@@ -75,7 +75,7 @@ mod cache;
 mod component;
 mod core;
 mod processor;
-mod spec;
+mod system;
 
 #[cfg(feature = "caching")]
 pub mod caching;
@@ -84,7 +84,7 @@ pub use cache::{Cache, L3};
 pub use component::{Component, Power};
 pub use core::Core;
 pub use processor::{Cores, L3s, Processor};
-pub use spec::Spec;
+pub use system::System;
 
 impl Display for Error {
     fn fmt(&self, formatter: &mut Formatter) -> fmt::Result {
@@ -106,10 +106,10 @@ impl Display for ErrorKind {
     }
 }
 
-/// Load a specification from an XML file.
+/// Load a system from a file.
 #[inline]
-pub fn open(path: &Path) -> Result<Spec> {
-    Spec::open(path)
+pub fn open(path: &Path) -> Result<System> {
+    System::open(path)
 }
 
 /// Set a *global* flag controlling the optimization procedure.

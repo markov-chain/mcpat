@@ -1,7 +1,7 @@
 extern crate fixture;
 extern crate mcpat;
 
-use mcpat::{Component, Power, Spec};
+use mcpat::{Component, Power, System};
 use std::fs::File;
 use std::io::{BufRead, BufReader, Lines};
 use std::path::{Path, PathBuf};
@@ -16,8 +16,8 @@ fn blackscholes() {
     for xml in find("xml").iter() {
         println!("Processing {:?}...", ok!(xml.file_name()));
 
-        let spec = ok!(Spec::open(xml));
-        let processor = ok!(spec.processor());
+        let system = ok!(System::open(xml));
+        let processor = ok!(system.compute());
         let cores = processor.cores().map(|c| (c.area() * 1e-6, c.power())).collect::<Vec<_>>();
         let l3s = processor.l3s().map(|c| (c.area() * 1e-6, c.power())).collect::<Vec<_>>();
 

@@ -1,6 +1,6 @@
 extern crate mcpat;
 
-use mcpat::{Component, Spec};
+use mcpat::{Component, System};
 use std::path::PathBuf;
 
 #[macro_use]
@@ -12,8 +12,8 @@ fn workflow() {
     support::initialize();
 
     let path = PathBuf::from("tests/fixtures/Xeon.xml");
-    let spec = ok!(Spec::open(&path));
-    let processor = ok!(spec.processor());
+    let system = ok!(System::open(&path));
+    let processor = ok!(system.compute());
 
     {
         let mut cores = processor.cores();
