@@ -112,12 +112,12 @@ pub fn open(path: &Path) -> Result<System> {
     System::open(path)
 }
 
-/// Set a *global* flag controlling the optimization procedure.
+/// Set a flag controlling the optimization procedure.
 ///
 /// If the flag is set to true, apart from other optimization goals, the
 /// optimization is performed for the target clock rate. The switch is turned
 /// off by default.
 #[inline]
-pub fn set_optimzed_for_clock_rate(value: bool) {
+pub fn optimze_for_clock_rate(value: bool) {
     unsafe { raw::opt_for_clk_set(if value { 1 } else { 0 }) };
 }

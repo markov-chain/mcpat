@@ -13,7 +13,7 @@ macro_rules! round(
 
 #[cfg(not(feature = "caching"))]
 pub fn initialize() {
-    mcpat::set_optimzed_for_clock_rate(true);
+    mcpat::optimze_for_clock_rate(true);
 }
 
 #[cfg(not(feature = "caching"))]
@@ -22,7 +22,7 @@ pub fn deinitialize() {
 
 #[cfg(feature = "caching")]
 pub fn initialize() {
-    mcpat::set_optimzed_for_clock_rate(true);
+    mcpat::optimze_for_clock_rate(true);
     ok!(mcpat::caching::activate("127.0.0.1", 6379));
 }
 
