@@ -2,7 +2,7 @@ use raw;
 
 /// A component of a system on a chip.
 pub trait Component {
-    /// Return the area (m^2).
+    /// Return the area (m<sup>2</sup>).
     fn area(&self) -> f64;
     /// Return the dynamic power (W).
     fn dynamic_power(&self) -> f64;
