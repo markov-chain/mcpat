@@ -26,7 +26,7 @@ impl<'l> Component for Cache<'l> {
             let raw = raw::powerDef_readOp(raw);
             debug_assert!(!raw.is_null());
             raw::powerComponents_dynamic(raw) /
-            raw::CacheDynParam_executionTime(raw::SharedCache_cachep(self.raw.0))
+                raw::CacheDynParam_executionTime(raw::SharedCache_cachep(self.raw.0))
         }
     }
 
