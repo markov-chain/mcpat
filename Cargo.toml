@@ -3,9 +3,9 @@ name = "mcpat"
 version = "0.8.0"
 authors = ["Ivan Ukhov <ivan.ukhov@gmail.com>"]
 license = "MIT"
-repository = "https://github.com/simulated-reality/mcpat"
-homepage = "https://github.com/simulated-reality/mcpat"
-documentation = "https://simulated-reality.github.io/mcpat"
+repository = "https://github.com/markov-chain/mcpat"
+homepage = "https://github.com/markov-chain/mcpat"
+documentation = "https://markov-chain.github.io/mcpat"
 description = "The package provides an interface to McPAT."
 
 [features]

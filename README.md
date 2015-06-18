@@ -14,6 +14,6 @@ The package provides an interface to [McPAT][1].
 
 [version-img]: https://img.shields.io/crates/v/mcpat.svg
 [version-url]: https://crates.io/crates/mcpat
-[status-img]: https://travis-ci.org/simulated-reality/mcpat.svg?branch=master
-[status-url]: https://travis-ci.org/simulated-reality/mcpat
-[doc]: https://simulated-reality.github.io/mcpat
+[status-img]: https://travis-ci.org/markov-chain/mcpat.svg?branch=master
+[status-url]: https://travis-ci.org/markov-chain/mcpat
+[doc]: https://markov-chain.github.io/mcpat
