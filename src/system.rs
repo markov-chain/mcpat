@@ -15,7 +15,8 @@ impl System {
     /// Load a system from a file.
     ///
     /// The file is a configuration file of McPAT.
-    pub fn open(path: &Path) -> Result<System> {
+    pub fn open<T: AsRef<Path>>(path: T) -> Result<System> {
+        let path = path.as_ref();
         if !exists(path) {
             raise!(NotFound, format!("the file {:?} does not exist", path));
         }
@@ -50,7 +51,7 @@ impl Drop for System {
 }
 
 #[inline]
-fn exists(path: &Path) -> bool {
+fn exists<T: AsRef<Path>>(path: T) -> bool {
     match fs::metadata(path) {
         Ok(metadata) => !metadata.is_dir(),
         Err(_) => false,

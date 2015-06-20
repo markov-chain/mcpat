@@ -108,7 +108,7 @@ impl Display for ErrorKind {
 
 /// Load a system from a file.
 #[inline]
-pub fn open(path: &Path) -> Result<System> {
+pub fn open<T: AsRef<Path>>(path: T) -> Result<System> {
     System::open(path)
 }
 
