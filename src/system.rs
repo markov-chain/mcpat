@@ -22,7 +22,7 @@ impl System {
         }
         unsafe {
             let raw = not_null!(raw::new_ParseXML());
-            raw::ParseXML_parse(raw, path_to_c_str!(path) as *mut _);
+            raw::ParseXML_parse(raw, path_to_cstr!(path).as_ptr() as *mut _);
             Ok(System {
                 raw: (raw, debug_not_null!(raw::ParseXML_sys(raw))),
                 phantom: PhantomData,

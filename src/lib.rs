@@ -36,16 +36,16 @@ macro_rules! raise(
     );
 );
 
-macro_rules! str_to_c_str(
+macro_rules! str_to_cstr(
     ($string:expr) => (match ::std::ffi::CString::new($string) {
-        Ok(string) => string.as_ptr(),
+        Ok(string) => string,
         Err(_) => raise!("failed to process a string"),
     });
 );
 
-macro_rules! path_to_c_str(
+macro_rules! path_to_cstr(
     ($path:expr) => (match $path.to_str() {
-        Some(path) => str_to_c_str!(path),
+        Some(path) => str_to_cstr!(path),
         None => raise!("failed to process a path"),
     });
 );
