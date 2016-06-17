@@ -4,7 +4,7 @@ use libc::c_int;
 use raw;
 use hiredis;
 
-use {ErrorKind, Result};
+use Result;
 
 /// Turn on caching.
 ///
