@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="generator" content="rustdoc">
+    <meta name="description" content="API documentation for the Rust `system_core` struct in crate `mcpat_sys`.">
+    <meta name="keywords" content="rust, rustlang, rust-lang, system_core">
+
+    <title>mcpat_sys::system_core - Rust</title>
+
+    <link rel="stylesheet" type="text/css" href="../rustdoc.css">
+    <link rel="stylesheet" type="text/css" href="../main.css">
+    
+
+    
+    
+</head>
+<body class="rustdoc">
+    <!--[if lte IE 8]>
+    <div class="warning">
+        This old browser is unsupported and will most likely display funky
+        things.
+    </div>
+    <![endif]-->
+
+    
+
+    <nav class="sidebar">
+        
+        <p class='location'><a href='index.html'>mcpat_sys</a></p><script>window.sidebarCurrent = {name: 'system_core', ty: 'struct', relpath: ''};</script><script defer src="sidebar-items.js"></script>
+    </nav>
+
+    <nav class="sub">
+        <form class="search-form js-only">
+            <div class="search-container">
+                <input class="search-input" name="search"
+                       autocomplete="off"
+                       placeholder="Click or press ‘S’ to search, ‘?’ for more options…"
+                       type="search">
+            </div>
+        </form>
+    </nav>
+
+    <section id='main' class="content struct">
+<h1 class='fqn'><span class='in-band'>Struct <a href='index.html'>mcpat_sys</a>::<wbr><a class='struct' href=''>system_core</a></span><span class='out-of-band'><span id='render-detail'>
+                   <a id="toggle-all-docs" href="javascript:void(0)" title="collapse all docs">
+                       [<span class='inner'>&#x2212;</span>]
+                   </a>
+               </span><a id='src-522' class='srclink' href='../src/mcpat_sys/xml_parse.rs.html#127-259' title='goto source code'>[src]</a></span></h1>
+<pre class='rust struct'>pub struct system_core {
+    pub clock_rate: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub opt_local: <a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_bool</a>,
+    pub x86: <a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_bool</a>,
+    pub machine_bits: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub virtual_address_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub physical_address_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub opcode_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub micro_opcode_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub instruction_length: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub machine_type: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub internal_datapath_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub number_hardware_threads: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub fetch_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub number_instruction_fetch_ports: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub decode_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub issue_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub peak_issue_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub commit_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub pipelines_per_core: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 20]</a>,
+    pub pipeline_depth: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 20]</a>,
+    pub FPU: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 20]</a>,
+    pub divider_multiplier: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 20]</a>,
+    pub ALU_per_core: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub FPU_per_core: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub MUL_per_core: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub instruction_buffer_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub decoded_stream_buffer_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub instruction_window_scheme: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub instruction_window_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub fp_instruction_window_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub ROB_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub archi_Regs_IRF_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub archi_Regs_FRF_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub phy_Regs_IRF_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub phy_Regs_FRF_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub rename_scheme: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub checkpoint_depth: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub register_windows_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub LSU_order: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 20]</a>,
+    pub store_buffer_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub load_buffer_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub memory_ports: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub Dcache_dual_pump: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 20]</a>,
+    pub RAS_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub fp_issue_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub prediction_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub number_of_BTB: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub number_of_BPT: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a>,
+    pub total_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub int_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub fp_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub branch_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub branch_mispredictions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub committed_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub committed_int_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub committed_fp_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub load_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub store_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub total_cycles: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub idle_cycles: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub busy_cycles: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub instruction_buffer_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub instruction_buffer_write: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub ROB_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub ROB_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub rename_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub fp_rename_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub rename_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub rename_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub fp_rename_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub fp_rename_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub inst_window_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub inst_window_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub inst_window_wakeup_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub inst_window_selections: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub fp_inst_window_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub fp_inst_window_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub fp_inst_window_wakeup_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub fp_inst_window_selections: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub archi_int_regfile_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub archi_float_regfile_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub phy_int_regfile_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub phy_float_regfile_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub phy_int_regfile_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub phy_float_regfile_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub archi_int_regfile_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub archi_float_regfile_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub int_regfile_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub float_regfile_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub int_regfile_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub float_regfile_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub windowed_reg_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub windowed_reg_transports: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub function_calls: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub context_switches: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub ialu_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub fpu_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub mul_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub cdb_alu_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub cdb_mul_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub cdb_fpu_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub load_buffer_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub load_buffer_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub load_buffer_cams: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub store_buffer_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub store_buffer_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub store_buffer_cams: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub store_buffer_forwards: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub main_memory_access: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub main_memory_read: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub main_memory_write: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub pipeline_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub IFU_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub BR_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub LSU_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub MemManU_I_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub MemManU_D_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub ALU_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub MUL_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub FPU_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub ALU_cdb_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub MUL_cdb_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub FPU_cdb_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub vdd: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub power_gating_vcc: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a>,
+    pub predictor: <a class='struct' href='../mcpat_sys/struct.predictor_systemcore.html' title='mcpat_sys::predictor_systemcore'>predictor_systemcore</a>,
+    pub itlb: <a class='struct' href='../mcpat_sys/struct.itlb_systemcore.html' title='mcpat_sys::itlb_systemcore'>itlb_systemcore</a>,
+    pub icache: <a class='struct' href='../mcpat_sys/struct.icache_systemcore.html' title='mcpat_sys::icache_systemcore'>icache_systemcore</a>,
+    pub dtlb: <a class='struct' href='../mcpat_sys/struct.dtlb_systemcore.html' title='mcpat_sys::dtlb_systemcore'>dtlb_systemcore</a>,
+    pub dcache: <a class='struct' href='../mcpat_sys/struct.dcache_systemcore.html' title='mcpat_sys::dcache_systemcore'>dcache_systemcore</a>,
+    pub BTB: <a class='struct' href='../mcpat_sys/struct.BTB_systemcore.html' title='mcpat_sys::BTB_systemcore'>BTB_systemcore</a>,
+}</pre><h2 class='fields'>Fields</h2><span id='structfield.clock_rate' class='structfield'><code>clock_rate: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.opt_local' class='structfield'><code>opt_local: <a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_bool</a></code>
+                           </span><span class='stab '></span><span id='structfield.x86' class='structfield'><code>x86: <a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_bool</a></code>
+                           </span><span class='stab '></span><span id='structfield.machine_bits' class='structfield'><code>machine_bits: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.virtual_address_width' class='structfield'><code>virtual_address_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.physical_address_width' class='structfield'><code>physical_address_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.opcode_width' class='structfield'><code>opcode_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.micro_opcode_width' class='structfield'><code>micro_opcode_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.instruction_length' class='structfield'><code>instruction_length: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.machine_type' class='structfield'><code>machine_type: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.internal_datapath_width' class='structfield'><code>internal_datapath_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.number_hardware_threads' class='structfield'><code>number_hardware_threads: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.fetch_width' class='structfield'><code>fetch_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.number_instruction_fetch_ports' class='structfield'><code>number_instruction_fetch_ports: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.decode_width' class='structfield'><code>decode_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.issue_width' class='structfield'><code>issue_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.peak_issue_width' class='structfield'><code>peak_issue_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.commit_width' class='structfield'><code>commit_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.pipelines_per_core' class='structfield'><code>pipelines_per_core: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 20]</a></code>
+                           </span><span class='stab '></span><span id='structfield.pipeline_depth' class='structfield'><code>pipeline_depth: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 20]</a></code>
+                           </span><span class='stab '></span><span id='structfield.FPU' class='structfield'><code>FPU: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 20]</a></code>
+                           </span><span class='stab '></span><span id='structfield.divider_multiplier' class='structfield'><code>divider_multiplier: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 20]</a></code>
+                           </span><span class='stab '></span><span id='structfield.ALU_per_core' class='structfield'><code>ALU_per_core: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.FPU_per_core' class='structfield'><code>FPU_per_core: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.MUL_per_core' class='structfield'><code>MUL_per_core: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.instruction_buffer_size' class='structfield'><code>instruction_buffer_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.decoded_stream_buffer_size' class='structfield'><code>decoded_stream_buffer_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.instruction_window_scheme' class='structfield'><code>instruction_window_scheme: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.instruction_window_size' class='structfield'><code>instruction_window_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.fp_instruction_window_size' class='structfield'><code>fp_instruction_window_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.ROB_size' class='structfield'><code>ROB_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.archi_Regs_IRF_size' class='structfield'><code>archi_Regs_IRF_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.archi_Regs_FRF_size' class='structfield'><code>archi_Regs_FRF_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.phy_Regs_IRF_size' class='structfield'><code>phy_Regs_IRF_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.phy_Regs_FRF_size' class='structfield'><code>phy_Regs_FRF_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.rename_scheme' class='structfield'><code>rename_scheme: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.checkpoint_depth' class='structfield'><code>checkpoint_depth: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.register_windows_size' class='structfield'><code>register_windows_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.LSU_order' class='structfield'><code>LSU_order: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 20]</a></code>
+                           </span><span class='stab '></span><span id='structfield.store_buffer_size' class='structfield'><code>store_buffer_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.load_buffer_size' class='structfield'><code>load_buffer_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.memory_ports' class='structfield'><code>memory_ports: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.Dcache_dual_pump' class='structfield'><code>Dcache_dual_pump: <a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>[</a><a class='type' href='../libc/unix/notbsd/linux/other/b64/x86_64/type.c_char.html' title='libc::unix::notbsd::linux::other::b64::x86_64::c_char'>c_char</a><a class='primitive' href='https://doc.rust-lang.org/nightly/std/primitive.array.html'>; 20]</a></code>
+                           </span><span class='stab '></span><span id='structfield.RAS_size' class='structfield'><code>RAS_size: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.fp_issue_width' class='structfield'><code>fp_issue_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.prediction_width' class='structfield'><code>prediction_width: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.number_of_BTB' class='structfield'><code>number_of_BTB: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.number_of_BPT' class='structfield'><code>number_of_BPT: <a class='type' href='../libc/type.c_int.html' title='libc::c_int'>c_int</a></code>
+                           </span><span class='stab '></span><span id='structfield.total_instructions' class='structfield'><code>total_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.int_instructions' class='structfield'><code>int_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.fp_instructions' class='structfield'><code>fp_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.branch_instructions' class='structfield'><code>branch_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.branch_mispredictions' class='structfield'><code>branch_mispredictions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.committed_instructions' class='structfield'><code>committed_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.committed_int_instructions' class='structfield'><code>committed_int_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.committed_fp_instructions' class='structfield'><code>committed_fp_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.load_instructions' class='structfield'><code>load_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.store_instructions' class='structfield'><code>store_instructions: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.total_cycles' class='structfield'><code>total_cycles: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.idle_cycles' class='structfield'><code>idle_cycles: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.busy_cycles' class='structfield'><code>busy_cycles: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.instruction_buffer_reads' class='structfield'><code>instruction_buffer_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.instruction_buffer_write' class='structfield'><code>instruction_buffer_write: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.ROB_reads' class='structfield'><code>ROB_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.ROB_writes' class='structfield'><code>ROB_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.rename_accesses' class='structfield'><code>rename_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.fp_rename_accesses' class='structfield'><code>fp_rename_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.rename_reads' class='structfield'><code>rename_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.rename_writes' class='structfield'><code>rename_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.fp_rename_reads' class='structfield'><code>fp_rename_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.fp_rename_writes' class='structfield'><code>fp_rename_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.inst_window_reads' class='structfield'><code>inst_window_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.inst_window_writes' class='structfield'><code>inst_window_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.inst_window_wakeup_accesses' class='structfield'><code>inst_window_wakeup_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.inst_window_selections' class='structfield'><code>inst_window_selections: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.fp_inst_window_reads' class='structfield'><code>fp_inst_window_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.fp_inst_window_writes' class='structfield'><code>fp_inst_window_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.fp_inst_window_wakeup_accesses' class='structfield'><code>fp_inst_window_wakeup_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.fp_inst_window_selections' class='structfield'><code>fp_inst_window_selections: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.archi_int_regfile_reads' class='structfield'><code>archi_int_regfile_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.archi_float_regfile_reads' class='structfield'><code>archi_float_regfile_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.phy_int_regfile_reads' class='structfield'><code>phy_int_regfile_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.phy_float_regfile_reads' class='structfield'><code>phy_float_regfile_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.phy_int_regfile_writes' class='structfield'><code>phy_int_regfile_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.phy_float_regfile_writes' class='structfield'><code>phy_float_regfile_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.archi_int_regfile_writes' class='structfield'><code>archi_int_regfile_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.archi_float_regfile_writes' class='structfield'><code>archi_float_regfile_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.int_regfile_reads' class='structfield'><code>int_regfile_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.float_regfile_reads' class='structfield'><code>float_regfile_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.int_regfile_writes' class='structfield'><code>int_regfile_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.float_regfile_writes' class='structfield'><code>float_regfile_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.windowed_reg_accesses' class='structfield'><code>windowed_reg_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.windowed_reg_transports' class='structfield'><code>windowed_reg_transports: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.function_calls' class='structfield'><code>function_calls: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.context_switches' class='structfield'><code>context_switches: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.ialu_accesses' class='structfield'><code>ialu_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.fpu_accesses' class='structfield'><code>fpu_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.mul_accesses' class='structfield'><code>mul_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.cdb_alu_accesses' class='structfield'><code>cdb_alu_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.cdb_mul_accesses' class='structfield'><code>cdb_mul_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.cdb_fpu_accesses' class='structfield'><code>cdb_fpu_accesses: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.load_buffer_reads' class='structfield'><code>load_buffer_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.load_buffer_writes' class='structfield'><code>load_buffer_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.load_buffer_cams' class='structfield'><code>load_buffer_cams: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.store_buffer_reads' class='structfield'><code>store_buffer_reads: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.store_buffer_writes' class='structfield'><code>store_buffer_writes: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.store_buffer_cams' class='structfield'><code>store_buffer_cams: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.store_buffer_forwards' class='structfield'><code>store_buffer_forwards: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.main_memory_access' class='structfield'><code>main_memory_access: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.main_memory_read' class='structfield'><code>main_memory_read: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.main_memory_write' class='structfield'><code>main_memory_write: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.pipeline_duty_cycle' class='structfield'><code>pipeline_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.IFU_duty_cycle' class='structfield'><code>IFU_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.BR_duty_cycle' class='structfield'><code>BR_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.LSU_duty_cycle' class='structfield'><code>LSU_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.MemManU_I_duty_cycle' class='structfield'><code>MemManU_I_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.MemManU_D_duty_cycle' class='structfield'><code>MemManU_D_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.ALU_duty_cycle' class='structfield'><code>ALU_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.MUL_duty_cycle' class='structfield'><code>MUL_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.FPU_duty_cycle' class='structfield'><code>FPU_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.ALU_cdb_duty_cycle' class='structfield'><code>ALU_cdb_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.MUL_cdb_duty_cycle' class='structfield'><code>MUL_cdb_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.FPU_cdb_duty_cycle' class='structfield'><code>FPU_cdb_duty_cycle: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.vdd' class='structfield'><code>vdd: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.power_gating_vcc' class='structfield'><code>power_gating_vcc: <a class='type' href='../libc/type.c_double.html' title='libc::c_double'>c_double</a></code>
+                           </span><span class='stab '></span><span id='structfield.predictor' class='structfield'><code>predictor: <a class='struct' href='../mcpat_sys/struct.predictor_systemcore.html' title='mcpat_sys::predictor_systemcore'>predictor_systemcore</a></code>
+                           </span><span class='stab '></span><span id='structfield.itlb' class='structfield'><code>itlb: <a class='struct' href='../mcpat_sys/struct.itlb_systemcore.html' title='mcpat_sys::itlb_systemcore'>itlb_systemcore</a></code>
+                           </span><span class='stab '></span><span id='structfield.icache' class='structfield'><code>icache: <a class='struct' href='../mcpat_sys/struct.icache_systemcore.html' title='mcpat_sys::icache_systemcore'>icache_systemcore</a></code>
+                           </span><span class='stab '></span><span id='structfield.dtlb' class='structfield'><code>dtlb: <a class='struct' href='../mcpat_sys/struct.dtlb_systemcore.html' title='mcpat_sys::dtlb_systemcore'>dtlb_systemcore</a></code>
+                           </span><span class='stab '></span><span id='structfield.dcache' class='structfield'><code>dcache: <a class='struct' href='../mcpat_sys/struct.dcache_systemcore.html' title='mcpat_sys::dcache_systemcore'>dcache_systemcore</a></code>
+                           </span><span class='stab '></span><span id='structfield.BTB' class='structfield'><code>BTB: <a class='struct' href='../mcpat_sys/struct.BTB_systemcore.html' title='mcpat_sys::BTB_systemcore'>BTB_systemcore</a></code>
+                           </span><span class='stab '></span><h2 id='implementations'>Trait Implementations</h2><h3 id='derived_implementations'>Derived Implementations </h3><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html' title='core::fmt::Debug'>Debug</a> for <a class='struct' href='../mcpat_sys/struct.system_core.html' title='mcpat_sys::system_core'>system_core</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-660' class='srclink' href='../src/mcpat_sys/xml_parse.rs.html#125' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.fmt' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/fmt/trait.Debug.html#tymethod.fmt' class='fnname'>fmt</a>(&amp;self, __arg_0: &amp;mut <a class='struct' href='https://doc.rust-lang.org/nightly/core/fmt/struct.Formatter.html' title='core::fmt::Formatter'>Formatter</a>) -&gt; <a class='type' href='https://doc.rust-lang.org/nightly/core/fmt/type.Result.html' title='core::fmt::Result'>Result</a></code></h4>
+<div class='docblock'><p>Formats the value using the given formatter.</p>
+</div></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/marker/trait.Copy.html' title='core::marker::Copy'>Copy</a> for <a class='struct' href='../mcpat_sys/struct.system_core.html' title='mcpat_sys::system_core'>system_core</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-796' class='srclink' href='../src/mcpat_sys/xml_parse.rs.html#125' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'></div><h3 class='impl'><span class='in-band'><code>impl <a class='trait' href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html' title='core::clone::Clone'>Clone</a> for <a class='struct' href='../mcpat_sys/struct.system_core.html' title='mcpat_sys::system_core'>system_core</a></code></span><span class='out-of-band'><div class='ghost'></div><a id='src-797' class='srclink' href='../src/mcpat_sys/xml_parse.rs.html#125' title='goto source code'>[src]</a></span></h3>
+<div class='impl-items'><h4 id='method.clone' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone' class='fnname'>clone</a>(&amp;self) -&gt; <a class='struct' href='../mcpat_sys/struct.system_core.html' title='mcpat_sys::system_core'>system_core</a></code></h4>
+<div class='docblock'><p>Returns a copy of the value. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#tymethod.clone">Read more</a></p>
+</div><h4 id='method.clone_from' class='method'><code>fn <a href='https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from' class='fnname'>clone_from</a>(&amp;mut self, source: &amp;Self)</code><div class='since' title='Stable since Rust version 1.0.0'>1.0.0</div></h4>
+<div class='docblock'><p>Performs copy-assignment from <code>source</code>. <a href="https://doc.rust-lang.org/nightly/core/clone/trait.Clone.html#method.clone_from">Read more</a></p>
+</div></div></section>
+    <section id='search' class="content hidden"></section>
+
+    <section class="footer"></section>
+
+    <aside id="help" class="hidden">
+        <div>
+            <h1 class="hidden">Help</h1>
+
+            <div class="shortcuts">
+                <h2>Keyboard Shortcuts</h2>
+
+                <dl>
+                    <dt>?</dt>
+                    <dd>Show this help dialog</dd>
+                    <dt>S</dt>
+                    <dd>Focus the search field</dd>
+                    <dt>&larrb;</dt>
+                    <dd>Move up in search results</dd>
+                    <dt>&rarrb;</dt>
+                    <dd>Move down in search results</dd>
+                    <dt>&#9166;</dt>
+                    <dd>Go to active search result</dd>
+                    <dt>+</dt>
+                    <dd>Collapse/expand all sections</dd>
+                </dl>
+            </div>
+
+            <div class="infos">
+                <h2>Search Tricks</h2>
+
+                <p>
+                    Prefix searches with a type followed by a colon (e.g.
+                    <code>fn:</code>) to restrict the search to a given type.
+                </p>
+
+                <p>
+                    Accepted types are: <code>fn</code>, <code>mod</code>,
+                    <code>struct</code>, <code>enum</code>,
+                    <code>trait</code>, <code>type</code>, <code>macro</code>,
+                    and <code>const</code>.
+                </p>
+
+                <p>
+                    Search functions by type signature (e.g.
+                    <code>vec -> usize</code> or <code>* -> vec</code>)
+                </p>
+            </div>
+        </div>
+    </aside>
+
+    
+
+    <script>
+        window.rootPath = "../";
+        window.currentCrate = "mcpat_sys";
+        window.playgroundUrl = "";
+    </script>
+    <script src="../jquery.js"></script>
+    <script src="../main.js"></script>
+    
+    <script defer src="../search-index.js"></script>
+</body>
+</html>
