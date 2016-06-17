@@ -4,28 +4,28 @@ use std::marker::PhantomData;
 
 use {Core, L3, Phantom, Raw};
 
-/// An instance of a system on a chip.
+/// A processor.
 pub struct Processor<'l> {
     raw: Raw<raw::Processor>,
     phantom: Phantom<'l, raw::Processor>,
 }
 
-struct Items<'l, T> {
+pub struct Iterator<'l, T> {
     length: usize,
     position: usize,
     raw: Raw<raw::Processor>,
     phantom: PhantomData<(&'l raw::Processor, &'l raw::root_system, T)>,
 }
 
-trait Reader {
+pub trait Reader {
     fn read(raw: Raw<raw::Processor>, i: usize) -> Self;
 }
 
 /// An iterator over cores.
-pub type Cores<'l> = Items<'l, Core<'l>>;
+pub type Cores<'l> = Iterator<'l, Core<'l>>;
 
 /// An iterator over L3 caches.
-pub type L3s<'l> = Items<'l, L3<'l>>;
+pub type L3s<'l> = Iterator<'l, L3<'l>>;
 
 impl<'l> Processor<'l> {
     /// Return an iterator over cores.
@@ -58,14 +58,14 @@ impl<'l> Drop for Processor<'l> {
     }
 }
 
-impl<'l, T> Items<'l, T> {
+impl<'l, T> Iterator<'l, T> {
     /// Return the total number of items regardless of how many have been
     /// traversed.
     #[inline]
     pub fn len(&self) -> usize { self.length }
 }
 
-impl<'l, T> Iterator for Items<'l, T> where T: Reader {
+impl<'l, T> ::std::iter::Iterator for Iterator<'l, T> where T: Reader {
     type Item = T;
 
     fn next(&mut self) -> Option<T> {

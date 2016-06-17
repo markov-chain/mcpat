@@ -15,7 +15,7 @@ pub struct Error {
     pub message: Option<String>,
 }
 
-/// The class that an error belongs to.
+/// An error kind.
 #[derive(Clone, Copy, Debug)]
 pub enum ErrorKind {
     OutOfMemory,
@@ -68,7 +68,9 @@ macro_rules! debug_not_null(
     });
 );
 
-type Raw<T> = (*mut T, *mut raw::root_system);
+/// A raw type.
+pub type Raw<T> = (*mut T, *mut raw::root_system);
+
 type Phantom<'l, T> = PhantomData<(T, &'l raw::root_system)>;
 
 mod cache;
@@ -118,6 +120,6 @@ pub fn open<T: AsRef<Path>>(path: T) -> Result<System> {
 /// optimization is performed for the target clock rate. The switch is turned
 /// off by default.
 #[inline]
-pub fn optimze_for_clock_rate(value: bool) {
+pub fn optimize_for_clock_rate(value: bool) {
     unsafe { raw::opt_for_clk_set(if value { 1 } else { 0 }) };
 }

@@ -4,7 +4,7 @@ use std::marker::PhantomData;
 use {Phantom, Raw};
 use component::{self, Component};
 
-/// A central processing unit.
+/// A core.
 pub struct Core<'l> {
     raw: Raw<raw::Core>,
     phantom: Phantom<'l, raw::Core>,

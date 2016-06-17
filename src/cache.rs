@@ -4,7 +4,7 @@ use std::marker::PhantomData;
 use {Raw, Phantom};
 use component::{self, Component};
 
-/// A cache of a central processing unit.
+/// A cache.
 pub struct Cache<'l> {
     raw: Raw<raw::SharedCache>,
     phantom: Phantom<'l, raw::SharedCache>,

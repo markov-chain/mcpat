@@ -1,6 +1,6 @@
 use raw;
 
-/// A component of a system on a chip.
+/// A component.
 pub trait Component {
     /// Return the area (m<sup>2</sup>).
     fn area(&self) -> f64;

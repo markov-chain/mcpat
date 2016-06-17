@@ -5,7 +5,7 @@ use std::path::Path;
 
 use {Raw, Result, Processor};
 
-/// A system on a chip.
+/// A system.
 pub struct System {
     raw: Raw<raw::ParseXML>,
     phantom: PhantomData<raw::ParseXML>,
