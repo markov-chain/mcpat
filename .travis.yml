@@ -1,11 +1,16 @@
 language: rust
 sudo: false
 
+rust:
+  - stable
+  - beta
+  - nightly
+
 before_script:
   - redis-server tests/fixtures/redis.conf
 
 after_success:
-  - curl https://markov-chain.github.io/travis/after_success.sh | CARGO_FLAGS="--features=caching" bash
+  - curl https://markov-chain.github.io/travis/documentation.sh | CARGO_FLAGS="--features=caching" bash
 
 script:
   - cargo build --verbose
@@ -13,7 +18,7 @@ script:
 
 env:
   global:
-    secure: bjWh6WdsQRaMcMlEHjXoK9l2Ag0YghJTHj8OukMme/3ejparLlcUDR/ZWDM0PsStcQlWhwnOpAqWNFid3mEsHnZ4Fv28Zmj1HRkOTmEKR/2gEu7s/edzQbdYXh+x3NBiekKplodls4um8kiTL4+Nay46xAUNsw6R7JUpZD+1hqGBjsmHKpnNUBUPdhhmCf8qf/RFVPQS6Nz/ZiMfLNA4H4qwAaf/Y5Ntt7Cuy0C1W6oqDjCLxKWyHF0lUp5n69zTO0vZBi7p5PWzIVNilaGPi/xmoAoaDbPCj7umCduPhH1DVBWxottPeSsvwpIYlo/LaSWRX4N/rFPtG1FgyFAQOZJKmroq2JUnqjWpuZp1zHzf2b6+INGeL+qHAntW0oh1xCyvebxAG7zVB7bmQRfvrDdJd65Wr5yFXSuTdRX7th3ena4aB48OrH8nSEa9fpY3Q61zvwCTytp2/MlhlRjzXlrATjfFx7i1Qn7XSsh+fuaLGhULa5TMs8tNTZKcTTq34VV/RdZGCxY8Eyc59smJSZ8XrWzdT2hcN+ZZAuk9QHPcK2M5oKSM7zczJg/vAGTKMhYK/DqZedutWoEYnJ49RMiyiOa0HwUm34oF7tJpTrRDwQXLqSu0dbjNGCyng9ssFToTZCQGFgFTaDSwG7mo0M4RuTinelwt0RIO5HT6Xtk=
+    - secure: bg6hmZaSzYP8aANzrxH+QoqKOoEziJS7sdRynB7wmIslTAIJosy+FRlWqWzomXeonSIdEKy6MAnFHJnuZdQ8gdsd66wjkKNKrGxW8s5XQNY9A9+b4IbMGSVH8ZhDwrk3YNGTNHST8W83TOpE7Vmbd1MQrSkaV7EmBxR07XUVJn+EXP9FyeVZPOCjy3AvrDY+rAVz1cahwAM4rIuMbN7JcaSXD7lRjWShBJTI0ysvFkj123gdtdMC1QiBhfkO10kNJfVIheAO501C9Xi9e1CWeqj6IFfMjlpyAHhhz2GoF7XwlGvFKEaBi6VNaqne+0uvSGpnQ2dt/ivLaDa5Qq65TOUCFztNGSZkM6f/v8O1r5xcj4X9GOdOsjvwuO7XJoLlZQMKARVUdJQWjvPgG6lglmy/0jMurwMVSlAfY56CqO14qI1C1eKGfI1O0hixxchuUh99tLM24HskYEr0sBH37uOxe53SVj2vbw/WyNSNICDLJtcGkLrfu2mxqhBdYfKXn9rJdeSKUCfvRtXrkOSJYmVj2q8UJWjut3FejLzTPfINVaRHDMM6XusmmZHaRiAhZpj4wA1eKtNxXCf+ZeaEwZ4KIosh52L9bF7oxcdC/luH9PDMdBiR9yryoKDRMQoUNoR125rsOqb5JVo6bGG2wSdauQuqxLGC9VvCaT9n110=
 
 notifications:
   email: false
